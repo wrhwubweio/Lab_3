@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:background="@drawable/wallpaper">
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="72dp"
+        android:text="Relative layout"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:background="@color/blue"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="50dp"
+        ></TextView>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:paddingBottom="300dp"
+        android:paddingTop="256dp"
+        >
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="72dp"
+            android:text="Input text"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="50dp"
+            android:shadowColor="@color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="10"
+            ></TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textColorHint="@color/gray"
+            android:hint="input"
+            android:background="@drawable/input_field"
+            android:layout_alignParentBottom="true">
+        </EditText>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:paddingBottom="72dp"
+        android:paddingTop="256dp"
+        >
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="256dp"
+            android:layout_height="64dp"
+            android:background="@color/blue"
+            android:text="test"
+            android:textSize="32dp"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>
