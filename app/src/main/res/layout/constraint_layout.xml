@@ -17,6 +17,15 @@
         android:textSize="50dp"
         tools:ignore="MissingConstraints"></TextView>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:src="@drawable/hmm"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="87dp"></ImageView>
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="72dp"
@@ -26,13 +35,13 @@
         android:shadowDx="2"
         android:shadowDy="2"
         android:shadowRadius="10"
-        android:text="Input text"
+        android:text="@string/input_text"
         android:textColor="@color/white"
         android:textSize="50dp"
         android:textStyle="bold"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="182dp"></TextView>
+        tools:layout_editor_absoluteY="227dp"></TextView>
 
     <EditText
         android:layout_width="312dp"
@@ -40,7 +49,7 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/input_field"
         android:gravity="center"
-        android:hint="input"
+        android:hint="@string/input"
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
         android:textSize="25dp"
@@ -55,7 +64,7 @@
         android:layout_centerHorizontal="true"
         android:background="@color/blue"
         android:clickable="true"
-        android:text="test"
+        android:text="@string/input"
         android:textColor="@color/white"
         android:textSize="32dp"
         tools:layout_editor_absoluteX="77dp"
