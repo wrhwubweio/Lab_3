@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="Big">50dp</dimen>
-    <dimen name="Medium">30dp</dimen>
-    <dimen name="Small">20dp</dimen>
+    <dimen name="big">50dp</dimen>
+    <dimen name="medium">30dp</dimen>
+    <dimen name="small">20dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

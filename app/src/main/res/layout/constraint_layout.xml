@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/wallpaper">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="fill_parent"
         android:layout_height="72dp"
-        android:text="Constraint layout"
-        android:gravity="center"
         android:layout_centerHorizontal="true"
         android:background="@color/blue"
+        android:gravity="center"
+        android:text="Constraint layout"
         android:textColor="@color/white"
+        android:textSize="@dimen/big"
         android:textStyle="bold"
-        android:textSize="50dp"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"></TextView>
 
     <ImageView
@@ -23,27 +26,36 @@
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:src="@drawable/hmm"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="87dp"></ImageView>
+        app:layout_constraintBottom_toTopOf="@+id/outText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.5"
+        tools:ignore="MissingConstraints"></ImageView>
 
     <TextView
+        android:id="@+id/outText"
         android:layout_width="fill_parent"
         android:layout_height="72dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="227dp"
         android:gravity="center"
         android:shadowColor="@color/black"
         android:shadowDx="2"
         android:shadowDy="2"
         android:shadowRadius="10"
-        android:text="@string/input_text"
+        android:text="@string/out_text"
         android:textColor="@color/white"
-        android:textSize="50dp"
+        android:textSize="@dimen/big"
         android:textStyle="bold"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="227dp"></TextView>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"></TextView>
 
     <EditText
+        android:id="@+id/editText"
         android:layout_width="312dp"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
@@ -52,23 +64,33 @@
         android:hint="@string/input"
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
-        android:textSize="25dp"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="346dp"
+        android:textSize="@dimen/small"
+        app:layout_constraintBottom_toTopOf="@+id/ok"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/outText"
+        app:layout_constraintVertical_bias="0.301"
         tools:ignore="MissingConstraints"></EditText>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
+        android:id="@+id/ok"
+        android:onClick="onClickOk"
         android:layout_width="256dp"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginStart="77dp"
+        android:layout_marginEnd="78dp"
+        android:layout_marginBottom="49dp"
         android:background="@color/blue"
         android:clickable="true"
         android:text="@string/input"
         android:textColor="@color/white"
-        android:textSize="32dp"
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="618dp"
+        android:textSize="@dimen/medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -26,7 +27,7 @@
                 android:gravity="center"
                 android:text="Linear layout"
                 android:textColor="@color/white"
-                android:textSize="@dimen/Big"
+                android:textSize="@dimen/big"
                 android:textStyle="bold" />
 
             <ImageView
@@ -47,6 +48,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/outText"
             android:layout_width="fill_parent"
             android:layout_height="42dp"
             android:layout_weight="1"
@@ -55,22 +57,11 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="10"
-            android:text="@string/input_text"
+            android:text="@string/out_text"
             android:textColor="@color/white"
-            android:textSize="@dimen/Big"
+            android:textSize="@dimen/big"
             android:textStyle="bold" />
 
-        <EditText
-            android:layout_width="321dp"
-            android:layout_height="19dp"
-            android:layout_weight="0.5"
-            android:background="@drawable/input_field"
-            android:gravity="center"
-            android:hint="@string/input"
-            android:textColor="@color/black"
-            android:textColorHint="@color/gray"
-            android:layout_gravity="center"
-            android:textSize="25dp"></EditText>
     </LinearLayout>
 
     <LinearLayout
@@ -89,6 +80,7 @@
         android:gravity="center">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/ok"
             android:layout_width="256dp"
             android:layout_height="64dp"
             android:background="@color/blue"
