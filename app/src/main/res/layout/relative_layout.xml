@@ -32,6 +32,27 @@
             android:layout_centerInParent="true"
             android:src="@drawable/hmm"></ImageView>
 
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingLeft="32dp"
+            android:paddingTop="256dp"
+            android:paddingRight="32dp"
+            android:paddingBottom="72dp">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="256dp"
+                android:layout_height="64dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@color/blue"
+                android:clickable="true"
+                android:text="@string/button_input"
+                android:textColor="@color/white"
+                android:textSize="32dp" />
+        </RelativeLayout>
+
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -67,28 +88,6 @@
             android:background="@drawable/input_field"
             android:layout_alignParentBottom="true">
         </EditText>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:paddingLeft="32dp"
-        android:paddingRight="32dp"
-        android:paddingBottom="72dp"
-        android:paddingTop="256dp"
-        >
-
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="256dp"
-            android:layout_height="64dp"
-            android:background="@color/blue"
-            android:text="@string/button_input"
-            android:textSize="32dp"
-            android:textColor="@color/white"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:clickable="true"/>
     </RelativeLayout>
 
 

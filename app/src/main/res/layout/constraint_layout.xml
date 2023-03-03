@@ -13,85 +13,123 @@
         android:layout_centerHorizontal="true"
         android:background="@color/blue"
         android:gravity="center"
-        android:text="Constraint layout"
+        android:text="Авторизация"
         android:textColor="@color/white"
         android:textSize="@dimen/big"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"></TextView>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:src="@drawable/hmm"
-        app:layout_constraintBottom_toTopOf="@+id/outText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.5"
-        tools:ignore="MissingConstraints"></ImageView>
 
-    <TextView
-        android:id="@+id/outText"
-        android:layout_width="fill_parent"
-        android:layout_height="72dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="227dp"
-        android:gravity="center"
-        android:shadowColor="@color/black"
-        android:shadowDx="2"
-        android:shadowDy="2"
-        android:shadowRadius="10"
-        android:text="@string/out_text"
-        android:textColor="@color/white"
-        android:textSize="@dimen/big"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"></TextView>
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="312dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="300dp"
         android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/input_field"
-        android:gravity="center"
-        android:hint="@string/input"
-        android:textColor="@color/black"
-        android:textColorHint="@color/gray"
-        android:textSize="@dimen/small"
-        app:layout_constraintBottom_toTopOf="@+id/ok"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/outText"
-        app:layout_constraintVertical_bias="0.301"
-        tools:ignore="MissingConstraints"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
-    <Button
+
+        <EditText
+            android:id="@+id/editText_password"
+            android:layout_width="300dp"
+            android:layout_height="64dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/input_field"
+            android:gravity="center"
+            android:hint="@string/input_password"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints"></EditText>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_baseline_key_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="300dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="232dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <EditText
+            android:id="@+id/editText_name"
+            android:layout_width="300dp"
+            android:layout_height="69dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/input_field"
+            android:gravity="center"
+            android:hint="@string/input"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints"></EditText>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_baseline_person_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/ok"
-        android:onClick="onClickOk"
         android:layout_width="256dp"
         android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_marginStart="77dp"
         android:layout_marginEnd="78dp"
-        android:layout_marginBottom="49dp"
+        android:layout_marginBottom="48dp"
         android:background="@color/blue"
-        android:clickable="true"
-        android:text="@string/input"
+        android:gravity="center"
+        android:text="@string/button_input"
         android:textColor="@color/white"
-        android:textSize="@dimen/medium"
+        android:textSize="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left"
+        app:constraint_referenced_ids="editText_password" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="-12dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

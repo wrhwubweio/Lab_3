@@ -23,7 +23,9 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                intent.putExtra("text", textView.getText());
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }
