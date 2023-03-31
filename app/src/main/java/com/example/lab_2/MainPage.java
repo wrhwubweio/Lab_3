@@ -6,9 +6,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -80,8 +83,44 @@ public class MainPage extends Fragment {
         }
 
         ListViewAdapter adapter = new ListViewAdapter(view.getContext(), items);
-
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                OutInfo("Click test №" + l, true);
+            }
+        });
+
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+                switch (i){
+                    case 0:
+                        OutInfo("Cписок закончил прокрутку", true);
+                        break;
+                    case 1:
+                        OutInfo("Cписок начал прокрутку", true);
+                        break;
+                    case 2:
+                        OutInfo("Инерция", true);
+                        break;
+                }
+            }
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+            }
+        });
+    }
+
+    private void OutInfo(String text, Boolean outToast){
+        Log.d(TAG, text);
+        if(!outToast)
+            return;
+        Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                text, Toast.LENGTH_SHORT);
+        toast.show();
     }
 }
 
