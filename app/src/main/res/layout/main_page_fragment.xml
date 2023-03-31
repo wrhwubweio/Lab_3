@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,9 +9,10 @@
     android:orientation="vertical"
     android:background="@drawable/wallpaper">
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="350dp"
         android:layout_weight="2"
         android:orientation="horizontal">
 
@@ -49,88 +53,16 @@
         android:layout_height="match_parent"
         android:layout_weight="0.5"
         android:orientation="vertical">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="fill_parent"
-            android:layout_height="64dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="20dp"
-            android:background="@color/blue"
-            android:gravity="center"
-            android:text="@string/button_test"
-            android:textColor="@color/white"
-            android:textSize="32dp" />
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="fill_parent"
-            android:layout_height="64dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="20dp"
-            android:background="@color/blue"
-            android:gravity="center"
-            android:text="@string/button_test"
-            android:textColor="@color/white"
-            android:textSize="32dp" />
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="fill_parent"
-            android:layout_height="64dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="20dp"
-            android:background="@color/blue"
-            android:gravity="center"
-            android:text="@string/button_test"
-            android:textColor="@color/white"
-            android:textSize="32dp" />
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="fill_parent"
-            android:layout_height="64dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="20dp"
-            android:background="@color/blue"
-            android:gravity="center"
-            android:text="@string/button_test"
-            android:textColor="@color/white"
-            android:textSize="32dp" />
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="fill_parent"
-            android:layout_height="64dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="20dp"
-            android:background="@color/blue"
-            android:gravity="center"
-            android:text="@string/button_test"
-            android:textColor="@color/white"
-            android:textSize="32dp" />
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="fill_parent"
-            android:layout_height="64dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="20dp"
-            android:background="@color/blue"
-            android:gravity="center"
-            android:text="@string/button_test"
-            android:textColor="@color/white"
-            android:textSize="32dp" />
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#7000"
+            android:textAlignment="center"
+            >
+        </ListView>
 
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2.5"
-        android:orientation="vertical">
 
     </LinearLayout>
 
