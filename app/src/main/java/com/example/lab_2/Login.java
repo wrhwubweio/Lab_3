@@ -25,9 +25,10 @@ public class Login extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button nextButton = (Button) view.findViewById(R.id.ok);
+        Button nextButton_list = (Button) view.findViewById(R.id.ok);
+        Button nextButton_rec = (Button) view.findViewById(R.id.ok2);
         EditText editText = (EditText) view.findViewById(R.id.editText_name);
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        nextButton_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle result = new Bundle();
@@ -38,6 +39,21 @@ public class Login extends Fragment {
                 getParentFragmentManager().beginTransaction()
                         .replace(R.id.fragment_login,
                         new MainPage())
+                        .commit();
+            }
+        });
+
+        nextButton_rec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle result = new Bundle();
+                result.putString("text", String.valueOf(editText.getText()));
+                getParentFragmentManager().setFragmentResult(
+                        "requestKey", result);
+
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_login,
+                                new MainPageAlt())
                         .commit();
             }
         });

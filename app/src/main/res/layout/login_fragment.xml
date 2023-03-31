@@ -105,7 +105,24 @@
         android:layout_width="256dp"
         android:layout_height="64dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="32dp"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:text="@string/button_input"
+        android:textColor="@color/white"
+        android:textSize="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/ok2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/ok2"
+        android:layout_width="256dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"
         android:background="@color/blue"
         android:gravity="center"
         android:text="@string/button_input"
@@ -113,7 +130,7 @@
         android:textSize="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
