@@ -2,8 +2,8 @@ package com.example.lab_2;
 
 public class State {
 
-    private String name; // название
-    private int image; // ресурс флага
+    private String name;
+    private int image;
 
     public State(String name, int image) {
 

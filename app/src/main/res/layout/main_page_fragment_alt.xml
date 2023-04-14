@@ -36,7 +36,7 @@
                 android:layout_height="72dp"
                 android:paddingStart="120dp"
                 android:gravity="center_vertical"
-                android:text="Пользователь"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/big"
                 android:textStyle="bold" />

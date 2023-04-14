@@ -80,35 +80,8 @@ public class MainPageAlt extends Fragment {
             states.add(new State("Test " + index, pic));
         }
 
-        StateAdapter adapter = new StateAdapter(view.getContext(), states);
+        StateAdapter adapter = new StateAdapter(view.getContext(), getActivity(), states);
         recyclerView.setAdapter(adapter);
-
-        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                OutInfo("Click: " + e.getActionIndex(), true);
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
-
-    }
-
-    private void OutInfo(String text, Boolean outToast){
-        Log.d(TAG, text);
-        if(!outToast)
-            return;
-        Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                text, Toast.LENGTH_SHORT);
-        toast.show();
     }
 }
 

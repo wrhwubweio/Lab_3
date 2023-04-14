@@ -30,7 +30,6 @@ class Item {
     String getTitle() {
         return mTitle;
     }
-
 }
 
 public class ListViewAdapter extends ArrayAdapter<Item> {

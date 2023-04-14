@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/wallpaper">
+    android:background="@color/lite_gray">
 
 
     <LinearLayout
@@ -36,7 +36,7 @@
                 android:layout_height="72dp"
                 android:paddingStart="120dp"
                 android:gravity="center_vertical"
-                android:text="Пользователь"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/big"
                 android:textStyle="bold" />
@@ -57,13 +57,8 @@
             android:id="@+id/listView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#7000"
-            android:textAlignment="center"
-            >
+            android:textAlignment="center">
         </ListView>
-
-
-
     </LinearLayout>
 
 </LinearLayout>

@@ -5,6 +5,7 @@
     <string name="out_text">Input text</string>
     <string name="button_input">войти</string>
     <string name="button_test">тест</string>
+    <string name="end_test">завершить тест</string>
     <string name="title_activity_second">SecondActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

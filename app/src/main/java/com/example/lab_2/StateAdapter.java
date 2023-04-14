@@ -1,5 +1,6 @@
 package com.example.lab_2;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
@@ -19,11 +20,13 @@ public class StateAdapter  extends RecyclerView.Adapter<StateAdapter.ViewHolder>
     private String TAG = "MyTag";
     private final LayoutInflater inflater;
     private final List<State> states;
-    int selected_position = 0;
+    private Activity activity;
+    private int selected_position = 0;
 
-    StateAdapter(Context context, List<State> states) {
+    StateAdapter(Context context, Activity activity, List<State> states) {
         this.states = states;
         this.inflater = LayoutInflater.from(context);
+        this.activity = activity;
     }
     @Override
     public StateAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -43,14 +46,11 @@ public class StateAdapter  extends RecyclerView.Adapter<StateAdapter.ViewHolder>
         holder.nameView.setOnClickListener (new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OutInfo("Click" + holder.getAdapterPosition(), false);
+                OutInfo("Click" + holder.getAdapterPosition(), true);
                 if (holder.getAdapterPosition()  == RecyclerView.NO_POSITION) return;
-
-                // Updating old as well as new positions
                 notifyItemChanged(selected_position);
                 selected_position = holder.getAdapterPosition();
                 notifyItemChanged(selected_position);
-
             }
         });
     }
@@ -65,6 +65,7 @@ public class StateAdapter  extends RecyclerView.Adapter<StateAdapter.ViewHolder>
         final TextView nameView;
         ViewHolder(View view){
             super(view);
+            setIsRecyclable(true);
             imageView = view.findViewById(R.id.IvPicture);
             nameView = view.findViewById(R.id.tvTitle);
         }
@@ -74,8 +75,7 @@ public class StateAdapter  extends RecyclerView.Adapter<StateAdapter.ViewHolder>
         Log.d(TAG, text);
         if(!outToast)
             return;
-        //Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-        //        text, Toast.LENGTH_SHORT);
-        //toast.show();
+        Toast toast = Toast.makeText(activity, text, Toast.LENGTH_SHORT);
+        toast.show();
     }
 }
