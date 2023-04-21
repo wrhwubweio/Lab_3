@@ -118,7 +118,7 @@ public class MainPage extends Fragment {
 
         NotificationManagerCompat notificationManager =
                 NotificationManagerCompat.from(getContext());
-        // Since android Oreo notification channel is needed.
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
                     CHANNEL_ID,
@@ -136,7 +136,6 @@ public class MainPage extends Fragment {
         notificationManager.notify(
                 5, builder.build()
         );
-        // notificationId - должен быть уникальным для каждого уведомления в канале
     }
 }
 

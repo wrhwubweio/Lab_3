@@ -39,6 +39,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameTest" />
 
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:gravity="center"
+        android:text="15:00"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/medium"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/endTest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/a4" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/endTest"
         android:layout_width="256dp"

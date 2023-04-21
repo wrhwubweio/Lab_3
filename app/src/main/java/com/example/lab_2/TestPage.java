@@ -9,6 +9,7 @@ import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
@@ -33,6 +34,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.Navigation;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -43,6 +46,10 @@ public class TestPage extends Fragment {
     public TestPage(){
         super(R.layout.test_page);
     }
+    private  Intent intent;
+    private View mView;
+    private TextView timerText;
+    private long time;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,33 +72,65 @@ public class TestPage extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView text = (TextView) view.findViewById(R.id.nameTest);
+        timerText = (TextView) view.findViewById(R.id.timer);
 
         String result = getArguments().getString("num_test");
         text.setText("test №" + result.toString());
-
+        mView = view;
 
         Button nextButton_list = (Button) view.findViewById(R.id.endTest);
-
         nextButton_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Navigation.findNavController(view).popBackStack();
             }
         });
+
+        new CountDownTimer(600000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                // Used for formatting digit to be in 2 digits only
+                NumberFormat f = new DecimalFormat("00");
+                long hour = (millisUntilFinished / 3600000) % 24;
+                long min = (millisUntilFinished / 60000) % 60;
+                long sec = (millisUntilFinished / 1000) % 60;
+                time = millisUntilFinished;
+                timerText.setText(f.format(hour) + ":" + f.format(min) + ":" + f.format(sec));
+            }
+            // When the task is over it will print 00:00:00 there
+            public void onFinish() {
+                timerText.setText("00:00:00");
+            }
+        }.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
         setBanner();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(intent != null) {
+            requireActivity().stopService(intent);
+        }
     }
 
     private void setBanner(){
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if(!Settings.canDrawOverlays(getContext()) == true){
-                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Navigation.findNavController(mView).popBackStack();
+                intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:" + getActivity().getPackageName()));
                 startActivityForResult(intent, 16);
                 return;
             }
         }
-        Intent intent = new Intent(getContext(),  TestService.class);
+        intent = new Intent(getContext(),  TestService.class);
+        intent.putExtra("time", Long.valueOf(time));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             requireActivity().startForegroundService(intent);
         }
