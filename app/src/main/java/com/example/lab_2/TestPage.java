@@ -1,10 +1,21 @@
 package com.example.lab_2;
 
+import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Intent;
+import android.graphics.PixelFormat;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,6 +26,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.Navigation;
@@ -25,7 +39,7 @@ import java.util.Random;
 public class TestPage extends Fragment {
 
     private String TAG = "MyTag";
-
+    public static final String CHANNEL_ID = "ForegroundServiceChannel";
     public TestPage(){
         super(R.layout.test_page);
     }
@@ -64,9 +78,31 @@ public class TestPage extends Fragment {
                 Navigation.findNavController(view).popBackStack();
             }
         });
+        setBanner();
     }
 
-    private void OutInfo(String text, Boolean outToast){
+    private void setBanner(){
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(!Settings.canDrawOverlays(getContext()) == true){
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getActivity().getPackageName()));
+                startActivityForResult(intent, 16);
+                return;
+            }
+        }
+        Intent intent = new Intent(getContext(),  TestService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            requireActivity().startForegroundService(intent);
+        }
+        else{
+            requireActivity().startService(intent);
+        }
+    }
+
+
+
+    private void outInfo(String text, Boolean outToast){
         Log.d(TAG, text);
         if(!outToast)
             return;

@@ -19,7 +19,7 @@ android:layout_height="fill_parent"
         android:layout_height="?android:attr/listPreferredItemHeight"
         android:layout_width="fill_parent"
         android:textSize="@dimen/medium"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:gravity="center"
         android:layout_centerInParent="true"
         />

@@ -1,6 +1,11 @@
 package com.example.lab_2;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,16 +20,19 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 public class MainPage extends Fragment {
 
     private String TAG = "MyTag";
+    private final String CHANNEL_ID="main page";
 
     public MainPage(){
         super(R.layout.main_page_fragment);
@@ -38,7 +46,9 @@ public class MainPage extends Fragment {
             String str = bundle.getString("text", "name");
             Log.d(TAG, str);
         }
+        showNotification("Main", "opened main menu");
     }
+
 
     @Nullable
     @Override
@@ -99,6 +109,34 @@ public class MainPage extends Fragment {
         Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                 text, Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+
+
+
+    private void showNotification(String title, String text) {
+
+        NotificationManagerCompat notificationManager =
+                NotificationManagerCompat.from(getContext());
+        // Since android Oreo notification channel is needed.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                    CHANNEL_ID,
+                    NotificationManager.IMPORTANCE_HIGH);
+            channel.setLockscreenVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        NotificationCompat.Builder builder = new
+                NotificationCompat.Builder(getContext(), CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        notificationManager.notify(
+                5, builder.build()
+        );
+        // notificationId - должен быть уникальным для каждого уведомления в канале
     }
 }
 
