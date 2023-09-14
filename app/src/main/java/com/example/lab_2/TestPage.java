@@ -1,43 +1,28 @@
 package com.example.lab_2;
-
-import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Intent;
-import android.graphics.PixelFormat;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.provider.Settings;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.Navigation;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Collections;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class TestPage extends Fragment {
 
@@ -50,10 +35,21 @@ public class TestPage extends Fragment {
     private View mView;
     private TextView timerText;
     private long time;
+    private ArrayList<Question> questions = new ArrayList<Question>();
+    private FirebaseFirestore db;
+    private FirebaseAuth auth;
+    private long count_questions;
+    private int num_test = 0;
+    private TextView questText;
+    private ArrayList<Button> ans = new ArrayList<>();
+    private int step;
+    private Button left;
+    private Button right;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        db = FirebaseFirestore.getInstance();
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             String str = bundle.getString("text", "name");
@@ -72,12 +68,21 @@ public class TestPage extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView text = (TextView) view.findViewById(R.id.nameTest);
+        questText = (TextView) view.findViewById(R.id.question);
         timerText = (TextView) view.findViewById(R.id.timer);
 
         String result = getArguments().getString("num_test");
         text.setText("test №" + result.toString());
+        loadQuestions(Integer.valueOf(result));
         mView = view;
 
+        left = (Button) view.findViewById(R.id.left);
+        right = (Button) view.findViewById(R.id.right);
+
+        ans.add( (Button) view.findViewById(R.id.a1));
+        ans.add( (Button) view.findViewById(R.id.a2));
+        ans.add( (Button) view.findViewById(R.id.a3));
+        ans.add( (Button) view.findViewById(R.id.a4));
         Button nextButton_list = (Button) view.findViewById(R.id.endTest);
         nextButton_list.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,9 +92,22 @@ public class TestPage extends Fragment {
             }
         });
 
+        left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddStep(-1);
+            }
+        });
+
+        right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddStep(1);
+            }
+        });
+
         new CountDownTimer(600000, 1000) {
             public void onTick(long millisUntilFinished) {
-                // Used for formatting digit to be in 2 digits only
                 NumberFormat f = new DecimalFormat("00");
                 long hour = (millisUntilFinished / 3600000) % 24;
                 long min = (millisUntilFinished / 60000) % 60;
@@ -104,41 +122,82 @@ public class TestPage extends Fragment {
         }.start();
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        setBanner();
+    private void loadQuestions(int indexTest){
+        count_questions = 0;
+        db.collection("testes")
+                .document("test_"+indexTest)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                count_questions = (long) document.getData().get("count_questions");
+                                findQuestions(indexTest);
+                            } else {
+                                Log.d(TAG, "No such document");
+                            }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                });
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(intent != null) {
-            requireActivity().stopService(intent);
-        }
-    }
 
-    private void setBanner(){
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(!Settings.canDrawOverlays(getContext()) == true){
-                Navigation.findNavController(mView).popBackStack();
-                intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                        Uri.parse("package:" + getActivity().getPackageName()));
-                startActivityForResult(intent, 16);
-                return;
+    private void findQuestions(int index_test){
+        for(int i = 0; i < count_questions; i++){
+            int finalI = i;
+            if(questions.size() <= i) {
+                db.collection("testes")
+                        .document("test_" + index_test).collection("questions").document("question_" + (i + 1))
+                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if (document.exists()) {
+                                        ArrayList<String> answers = (ArrayList<String>) document.getData().get("answers");
+                                        String text_question = finalI + ": " + (String) document.getData().get("question");
+                                        Question question = new Question(text_question, answers);
+                                        question.setIndex(finalI);
+                                        outInfo(questions.size() + " : " + finalI, true);
+                                        questions.add(question);
+                                        if(questions.size() == count_questions){
+                                            Collections.reverse(questions);
+                                            setQuestion(0);
+                                        }
+                                    } else {
+                                        Log.d(TAG, "No such document");
+                                    }
+                                } else {
+                                    Log.d(TAG, "get failed with ", task.getException());
+                                }
+                            }
+                        });
             }
         }
-        intent = new Intent(getContext(),  TestService.class);
-        intent.putExtra("time", Long.valueOf(time));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            requireActivity().startForegroundService(intent);
-        }
-        else{
-            requireActivity().startService(intent);
-        }
     }
 
+    private void AddStep(int dir){
+        step += dir;
+        if(step == count_questions){
+            step = 0;
+        }
+        if(step < 0){
+            step = (int) (count_questions - 1);
+        }
+        setQuestion(step);
+    }
+
+    private void setQuestion(int index){
+        Question q = questions.get(index);
+        questText.setText(q.getQuestion());
+
+        for (int i = 0; i < q.getAnswers().size(); i++){
+            ans.get(i).setText(q.getAnswers().get(i));
+        }
+    }
 
 
     private void outInfo(String text, Boolean outToast){
@@ -146,7 +205,7 @@ public class TestPage extends Fragment {
         if(!outToast)
             return;
         Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                text, Toast.LENGTH_SHORT);
+                text, Toast.LENGTH_LONG);
         toast.show();
     }
 }
