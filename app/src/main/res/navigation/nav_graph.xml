@@ -35,5 +35,8 @@
         android:id="@+id/TestFragment"
         android:name="com.example.lab_2.TestPage"
         android:label="TestPage" >
+        <action
+            android:id="@+id/action_TestFragment_to_MainFragment"
+            app:destination="@id/MainFragment" />
     </fragment>
 </navigation>

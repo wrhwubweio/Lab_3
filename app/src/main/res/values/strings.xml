@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Tester</string>
-    <string name="input">login</string>
-    <string name="input_password">password</string>
+    <string name="input">почта</string>
+    <string name="input_password">пароль</string>
     <string name="out_text">Input text</string>
     <string name="button_input">войти</string>
     <string name="button_test">тест</string>

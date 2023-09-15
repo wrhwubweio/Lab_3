@@ -39,8 +39,7 @@ public class Login extends Fragment {
         this.view = view;
 
         if (auth.getCurrentUser() != null) {
-            //OutInfo("автоматический вход", true);
-            LoadMainMenu(auth.getCurrentUser().getEmail());
+            loadMainMenu(auth.getCurrentUser().getEmail());
             return;
         }
         nextButton_list.setOnClickListener(new View.OnClickListener() {
@@ -62,17 +61,16 @@ public class Login extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            LoadMainMenu(login);
+                            loadMainMenu(login);
                             return;
                         } else {
-                            OutInfo("Ошибка", true);
+                            OutInfo("Неправильный логин/пароль", true);
                         }
                     }
                 });
-
     }
 
-    private void LoadMainMenu(String name){
+    private void loadMainMenu(String name){
         Bundle result = new Bundle();
         result.putString("name", name);
         Navigation.findNavController(view).navigate(R.id.action_login_to_main, result);

@@ -15,6 +15,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,7 +82,7 @@ public class MainPage extends Fragment {
             text.setText(result);
         }
 
-        Button quit = (Button) view.findViewById(R.id.quit);
+        ImageButton quit = (ImageButton) view.findViewById(R.id.quit);
 
         ListView listView = view.findViewById(R.id.listView);
         ArrayList<Item> items = new ArrayList<>();
@@ -106,9 +107,11 @@ public class MainPage extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Bundle result = new Bundle();
-                result.putString("num_test", String.valueOf(i+1));
-                Navigation.findNavController(view).navigate(R.id.action_main_to_test, result);
+                if (complete.get(i).intValue() == 0) {
+                    Bundle result = new Bundle();
+                    result.putString("num_test", String.valueOf(i + 1));
+                    Navigation.findNavController(view).navigate(R.id.action_main_to_test, result);
+                }
             }
         });
 
@@ -135,7 +138,6 @@ public class MainPage extends Fragment {
                         complete = (ArrayList<Long>)document.getData().get("testes_complete");
                         OutInfo(complete.toString(), true);
                         SetListView(view, listView, items, count_testes);
-                        //OutInfo(document.getData().get("testes_complete").toString(), true);
                     } else {
                         Map<String, ArrayList> testes = new HashMap<>();
                         for(int i = 0; i < count; i++){
@@ -156,20 +158,22 @@ public class MainPage extends Fragment {
     private void SetListView(View view, ListView listView, ArrayList<Item> items, long count){
         for(int i = 0; i < complete.size(); i++){
             int pic = R.drawable.wait;
+            boolean active = false;
             int rand = complete.get(i).intValue();
             switch (rand){
                 case 0:
-                    pic = R.drawable.wait;
+                    pic = R.drawable.circle;
+                    active = true;
                     break;
                 case 1:
-                    pic = R.drawable.successfully;
+                    pic = R.drawable.circle_done;
                     break;
                 case 2:
                     pic = R.drawable.fail;
                     break;
             }
             int index = i + 1;
-            items.add(new Item(pic, "Test " + index));
+            items.add(new Item(pic, "Тест №" + index,active));
             ListViewAdapter adapter = new ListViewAdapter(view.getContext(), items);
             listView.setAdapter(adapter);
         }

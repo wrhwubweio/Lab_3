@@ -17,22 +17,29 @@ class Item {
 
     private int mPicture;
     private String mTitle;
+    private boolean mActive;
 
     int getPicture() {
         return mPicture;
     }
 
-    Item(int picture, String title) {
+    Item(int picture, String title, boolean active) {
         mPicture = picture;
         mTitle = title;
+        mActive = active;
     }
 
     String getTitle() {
         return mTitle;
     }
+
+    public boolean ismActive() {
+        return mActive;
+    }
 }
 
 public class ListViewAdapter extends ArrayAdapter<Item> {
+
 
     ListViewAdapter(@NonNull Context context, ArrayList<Item> items) {
         super(context, 0, items);
@@ -46,8 +53,6 @@ public class ListViewAdapter extends ArrayAdapter<Item> {
         if (listItem == null) {
             listItem = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
-
-        // Get the {@link Word} object located at this position in the list
         Item currentItem = getItem(position);
 
         ImageView picture = listItem.findViewById(R.id.IvPicture);

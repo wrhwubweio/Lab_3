@@ -6,33 +6,33 @@ public class Question {
     private String question;
     private int index;
     private ArrayList<String> answers;
+    private int given_answer;
+    private int correct_answer;
 
-    public Question(String question, ArrayList<String> questions) {
+    public Question(String question, ArrayList<String> questions, int correct_answer, int index) {
         this.question = question;
         this.answers = questions;
+        this.correct_answer = correct_answer;
+        this.index = index;
     }
 
     public String getQuestion() {
         return question;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
-    }
-
     public ArrayList<String> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(ArrayList<String> answers) {
-        this.answers = answers;
+    public int getGiven_answer() {
+        return given_answer;
     }
 
-    public int getIndex() {
-        return index;
+    public void setGiven_answer(int given_answer) {
+        this.given_answer = given_answer;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    public boolean CheckCorrect(){
+        return correct_answer == given_answer;
     }
 }
